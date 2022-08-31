@@ -4,13 +4,14 @@ export const isInCart = (product, cartItems) => {
   return cartItems.find(item => item.id === product.id);
 }
 
-const API = 'http://localhost:8080';
+const URI = 'http://localhost:8080';
 
+// just a fetch helper for endpoint, req body bullshit 
 export async function fetchFromAPI(endpoint, opts) {
   const { method, body } = { method: 'POST', body: null, ...opts };
   const user = auth.currentUser;
   const token = user && (await user.getIdToken());
-  const res = await fetch(`${API}/${endpoint}`, {
+  const res = await fetch(`${URI}/${endpoint}`, {
     method,
     ...(body && { body: JSON.stringify(body) }),
     headers: {
